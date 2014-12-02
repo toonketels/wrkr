@@ -1,0 +1,12 @@
+{application, wrkr, [
+	{description, "a job queue"},
+	{vsn, "0.1.0"},
+	{modules, []},
+	{registered, [wrkr_sup]},
+	{applications, [
+		kernel,
+		stdlib
+	]},
+	{mod, {wrkr_app, []}},
+	{env, []}
+]}.
