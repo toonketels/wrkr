@@ -11,7 +11,7 @@
 %% States
 -export([wait/2, wait/3]).
 
--record(state, {}).
+-record(state, {name,payload}).
 
 
 
@@ -19,7 +19,7 @@
 
 start_link(Args) ->
 	io:format("start link ~p ~n", [Args]),
-	gen_fsm:start_link(?MODULE, [], []).
+	gen_fsm:start_link(?MODULE, [Args], []).
 
 
 
@@ -35,9 +35,8 @@ wait(Event, From, State) ->
 
 
 % Gen_fsm callbacks and states
-
-init([]) ->
-	{ok, wait, #state{}}.
+init([{Name, Payload}]) ->
+	{ok, wait, #state{name=Name, payload=Payload}}.
 
 handle_event(Event, StateName, State) ->
 	io:format("Handle event ~p ~p ~p ~n", [Event, StateName, State]),
